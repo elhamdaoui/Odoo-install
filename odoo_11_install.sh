@@ -19,7 +19,7 @@ OE_VERSION="11.0"
 # Set this to True if you want to install Odoo 10 Enterprise!
 IS_ENTERPRISE="False"
 #set the superadmin password
-OE_SUPERADMIN="@dmin@"
+OE_SUPERADMIN="superadminpass"
 OE_CONFIG="${OE_USER}-server"
 
 #Set the database config
