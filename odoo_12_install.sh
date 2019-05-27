@@ -11,6 +11,9 @@ OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
+#Set to true if you want to install it, false if you don't need it or have it already installed.
+INSTALL_POSTGRESQL="True"
+CREATE_USER_POSTGRESQL="True"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8012"
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
@@ -52,18 +55,22 @@ sudo apt-get upgrade -y
 #--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
-echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql -y
 
-echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
-sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
+if [ $INSTALL_POSTGRESQL = "True" ]; then
+	echo -e "\n---- Install PostgreSQL Server ----"
+	sudo apt-get install postgresql -y
 
+	echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
+	sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
+else
+	echo -e "\n POSTGRESQL isn't installed due to the choice of the user! and no postgresql user have been created"
+fi
 #psql -U postgres -c "ALTER USER $OE_USER WITH PASSWORD '$DB_PASSWORD'"
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
-echo -e "\n---- Install/upgrade Python 3 Pip"
-sudo apt-get install python3-pip -y
+echo -e "\n---- Install/upgrade Python 3 Pip and other depends"
+sudo apt install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less -y
 sudo pip3 install --upgrade pip
 echo -e "\n---- Pip current version ---" && pip3 --version
 
@@ -112,6 +119,10 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 #--------------------------------------------------
 echo -e "\n==== Installing ODOO Server ===="
 sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $OE_HOME_EXT/
+
+# --- install requirements odoo 12
+sudo pip3 install wheel
+sudo pip3 intsall -r $OE_HOME_EXT/requirements.txt
 
 if [ $IS_ENTERPRISE = "True" ]; then
     # Odoo Enterprise install!
