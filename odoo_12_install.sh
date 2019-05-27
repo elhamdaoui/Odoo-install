@@ -10,9 +10,9 @@ OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
 #Set to true if you want to install it, false if you don't need it or have it already installed.
-INSTALL_WKHTMLTOPDF="False"
+INSTALL_WKHTMLTOPDF="True"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
-OE_PORT="8011"
+OE_PORT="8012"
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
 OE_VERSION="12.0"
@@ -23,21 +23,24 @@ OE_SUPERADMIN="superadminpass"
 OE_CONFIG="${OE_USER}-server"
 
 #Set the database config
-DB_HOST="False"
-DB_PORT="False"
-DB_PASSWORD="False"
+DB_HOST="127.0.0.1"
+DB_PORT="5432"
+DB_PASSWORD="hoLa£marrUecos"
 
 # OCA Modules
 REP_OCA_WEB="https://github.com/OCA/web.git"
 REP_OCA_SERVER_TOOLS="https://github.com/OCA/server-tools.git"
+REP_OCA_SERVER_UX = "https://github.com/OCA/server-ux.git"
+REP_OCA_REPORT_ENGINE = "https://github.com/OCA/reporting-engine.git"
+REP_OCA_ACC_FIN_TOOLS = "https://github.com/OCA/account-financial-tools.git"
 
 ##
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
 ## in order to have correct version of wkhtmltox installed, for a danger note refer to 
 ## https://www.odoo.com/documentation/8.0/setup/install.html#deb ):
-WKHTMLTOX_X64=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.1/wkhtmltox-0.12.1_linux-trusty-amd64.deb
-WKHTMLTOX_X32=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.1/wkhtmltox-0.12.1_linux-trusty-i386.deb
+WKHTMLTOX_X64=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+WKHTMLTOX_X32=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_i386.deb
 
 #--------------------------------------------------
 # Update Server
@@ -81,13 +84,14 @@ sudo apt-get install python-gevent -y
 if [ $INSTALL_WKHTMLTOPDF = "True" ]; then
   echo -e "\n---- Install wkhtml and place shortcuts on correct place for ODOO 10 ----"
   #pick up correct one from x64 & x32 versions:
-  if [ "`getconf LONG_BIT`" == "64" ];then
+  if [ "`getconf LONG_BIT`" == "64" ]; then
       _url=$WKHTMLTOX_X64
   else
       _url=$WKHTMLTOX_X32
   fi
   sudo wget $_url
-  sudo gdebi --n `basename $_url`
+  sudo dpkg -i `basename $_url`
+  sudo apt install -f
   sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin
   sudo ln -s /usr/local/bin/wkhtmltoimage /usr/bin
 else
@@ -139,16 +143,34 @@ sudo su $OE_USER -c "mkdir $OE_HOME/OCA"
 
 if [ $REP_OCA_WEB != "False" ]; then
 	echo -e "\n==== Download OCA WEB ===="
-	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/web/addons"
-	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_WEB $OE_HOME/OCA/web/addons
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/web"
+	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_WEB $OE_HOME/OCA/web
 fi
 
 if [ $REP_OCA_SERVER_TOOLS != "False" ]; then
 	echo -e "\n==== Download OCA Server-tools ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/server-tools"
-	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/server-tools/addons"
-	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_TOOLS $OE_HOME/OCA/server-tools/addons
+	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_TOOLS $OE_HOME/OCA/server-tools
 fi
+
+if [ $REP_OCA_SERVER_UX != "False" ]; then
+	echo -e "\n==== Download OCA SERVER-UX ===="
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/server-ux"
+	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_TOOLS $OE_HOME/OCA/server-ux
+fi
+
+if [ $REP_OCA_REPORT_ENGINE != "False" ]; then
+	echo -e "\n==== Download OCA Report-engine ===="
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/report-engine"
+	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_REPORT_ENGINE $OE_HOME/OCA/report-engine
+fi
+
+if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
+	echo -e "\n==== Download OCA Report-engine ===="
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/report-engine"
+	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_ACC_FIN_TOOLS $OE_HOME/OCA/account-financial-tools
+fi
+
 
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
