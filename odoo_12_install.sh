@@ -5,14 +5,14 @@
  
 ##fixed parameters
 #odoo
-OE_USER="Abdelmajid"
+OE_USER="odoo12"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
-INSTALL_POSTGRESQL="True"
+INSTALL_POSTGRESQL="False"
 CREATE_USER_POSTGRESQL="True"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8012"
@@ -20,19 +20,19 @@ OE_PORT="8012"
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
 OE_VERSION="12.0"
 # Set this to True if you want to install Odoo 10 Enterprise!
-IS_ENTERPRISE="False"
+IS_ENTERPRISE="True"
 #set the superadmin password
-OE_SUPERADMIN="superadminpass"
+OE_SUPERADMIN="MJID@ADMIN"
 OE_CONFIG="${OE_USER}-server"
 
 #Set the database config
 DB_HOST="127.0.0.1"
 DB_PORT="5432"
-DB_PASSWORD="hoLa£marrUecos"
+DB_PASSWORD="Mery"
 
 # OCA Modules
-REP_OCA_WEB="https://github.com/OCA/web.git"
-REP_OCA_SERVER_TOOLS="https://github.com/OCA/server-tools.git"
+REP_OCA_WEB = "https://github.com/OCA/web.git"
+REP_OCA_SERVER_TOOLS = "https://github.com/OCA/server-tools.git"
 REP_OCA_SERVER_UX = "https://github.com/OCA/server-ux.git"
 REP_OCA_REPORT_ENGINE = "https://github.com/OCA/reporting-engine.git"
 REP_OCA_ACC_FIN_TOOLS = "https://github.com/OCA/account-financial-tools.git"
@@ -84,6 +84,15 @@ echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
 sudo apt-get install node-less -y
 sudo apt-get install python-gevent -y
+
+
+
+# after last update in Ubuntu 18.04 LTS
+sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil reportlab html2text docuti
+sudo apt-get install python3-dateutil python3-psycopg2
+#####
+
+
 
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
