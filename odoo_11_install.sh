@@ -5,27 +5,27 @@
  
 ##fixed parameters
 #odoo
-OE_USER="abdelmajid"
+OE_USER="odoo11"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
 #Set to true if you want to install it, false if you don't need it or have it already installed.
-INSTALL_WKHTMLTOPDF="False"
+INSTALL_WKHTMLTOPDF="True"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8011"
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
 OE_VERSION="11.0"
 # Set this to True if you want to install Odoo 10 Enterprise!
-IS_ENTERPRISE="False"
+IS_ENTERPRISE="True"
 #set the superadmin password
 OE_SUPERADMIN="superadminpass"
 OE_CONFIG="${OE_USER}-server"
 
 #Set the database config
-DB_HOST="False"
-DB_PORT="False"
-DB_PASSWORD="False"
+DB_HOST="35.193.64.199"
+DB_PORT="5432"
+DB_PASSWORD="odoo"
 
 # OCA Modules
 REP_OCA_WEB="https://github.com/OCA/web.git"
