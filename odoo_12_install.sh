@@ -88,7 +88,7 @@ sudo apt-get install python-gevent -y
 
 
 # after last update in Ubuntu 18.04 LTS
-sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil reportlab html2text docuti
+sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil reportlab html2text docuti suds
 sudo apt-get install python3-dateutil python3-psycopg2
 #####
 
