@@ -23,7 +23,7 @@ OE_SUPERADMIN="superadminpass"
 OE_CONFIG="${OE_USER}-server"
 
 #Set the database config
-DB_HOST="35.193.64.199"
+DB_HOST="127.0.0.1"
 DB_PORT="5432"
 DB_PASSWORD="odoo"
 
