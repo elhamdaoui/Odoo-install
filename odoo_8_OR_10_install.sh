@@ -5,7 +5,7 @@
  
 ##fixed parameters
 #odoo
-OE_USER="abdelmajid"
+OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
@@ -24,8 +24,8 @@ OE_SUPERADMIN="superadminpass"
 OE_CONFIG="${OE_USER}-server"
 
 #Set the database config
-DB_HOST="False"
-DB_PORT="False"
+DB_HOST="127.0.0.1"
+DB_PORT="5432"
 DB_PASSWORD="False"
 
 # OCA Modules
@@ -72,6 +72,7 @@ echo -e "\n---- Install python packages/librairies ----"
 sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-decorator python-requests python-passlib python-pil -y python-suds
 
 sudo pip install gdata psycogreen ofxparse XlsxWriter xlrd
+sudo apt-get install python-matplotlib
 
 echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
