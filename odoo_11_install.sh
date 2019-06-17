@@ -84,8 +84,8 @@ sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet ht
 echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
 sudo apt-get install node-less -y
-sudo apt-get install python-gevent -y
-sudo apt-get install python-psycopg2 -y
+sudo apt-get install python3-gevent -y
+sudo apt-get install python3-psycopg2 -y
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
 #--------------------------------------------------
