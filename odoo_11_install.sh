@@ -30,7 +30,10 @@ DB_PASSWORD="odoo"
 # OCA Modules
 REP_OCA_WEB="https://github.com/OCA/web.git"
 REP_OCA_SERVER_TOOLS="https://github.com/OCA/server-tools.git"
+REP_OCA_SERVER_UX="https://github.com/OCA/server-ux.git"
 
+CUSTOM_1="https://github.com/OCA/web.git"
+CUSTOM_1_name = "bigdata"
 ##
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
@@ -149,9 +152,27 @@ if [ $REP_OCA_SERVER_TOOLS != "False" ]; then
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_TOOLS $OE_HOME/OCA/server-tools/addons
 fi
 
+if [ $REP_OCA_SERVER_UX != "False" ]; then
+	echo -e "\n==== Download OCA Server-ux ===="
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/server-ux"
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/server-ux/addons"
+	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_UX $OE_HOME/OCA/server-ux/addons
+fi
+
+
+
+
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
+
+if [ $CUSTOM_1 != "False" ]; then
+	echo -e "\n==== Download OCA CUSTOM_1_name ===="
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/$CUSTOM_1_name"
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/CUSTOM_1_name"
+	sudo git clone --depth 1 --branch $OE_VERSION $CUSTOM_1 $OE_HOME/custom/$CUSTOM_1_name
+fi
+
 
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
