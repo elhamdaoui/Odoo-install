@@ -12,6 +12,9 @@ OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
+INSTALL_POSTGRESQL="False"
+CREATE_USER_POSTGRESQL="True"
+
 OE_PORT="8011"
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
@@ -51,11 +54,17 @@ sudo apt-get upgrade -y
 #--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
-echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql -y
+if [ $INSTALL_POSTGRESQL = "True" ]; then
+	echo -e "\n---- Install PostgreSQL Server ----"
+	sudo apt-get install postgresql -y
 
-echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
-sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
+	echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
+	sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
+else
+	sudo apt install postgresql-client-common
+	sudo apt-get install -y postgresql-client
+	echo -e "\n POSTGRESQL isn't installed due to the choice of the user! and no postgresql user have been created"
+fi
 
 #psql -U postgres -c "ALTER USER $OE_USER WITH PASSWORD '$DB_PASSWORD'"
 #--------------------------------------------------
