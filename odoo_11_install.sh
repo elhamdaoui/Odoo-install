@@ -79,13 +79,13 @@ echo -e "\n---- Install tool packages ----"
 sudo apt-get install wget git python3-pip gdebi-core -y
 
 echo -e "\n---- Install python packages/librairies ----"
-sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen psycopg2 pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug XlsxWriter xlwt xlrd gdata
+sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug XlsxWriter xlwt xlrd gdata
 
 echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
 sudo apt-get install node-less -y
 sudo apt-get install python-gevent -y
-
+sudo apt-get install python-psycopg2 -y
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
 #--------------------------------------------------
@@ -178,7 +178,7 @@ sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
 if [ $CUSTOM_1 != "False" ]; then
 	echo -e "\n==== Download OCA CUSTOM_1_name ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/$CUSTOM_1_name"
-	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/CUSTOM_1_name"
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/$CUSTOM_1_name"
 	sudo git clone --depth 1 --branch $OE_VERSION $CUSTOM_1 $OE_HOME/custom/$CUSTOM_1_name
 fi
 
