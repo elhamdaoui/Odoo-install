@@ -191,7 +191,7 @@ fi
 
 if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
 	echo -e "\n==== Download OCA Report-engine ===="
-	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/report-engine"
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/account-financial-tools"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_ACC_FIN_TOOLS $OE_HOME/OCA/account-financial-tools
 fi
 
@@ -227,7 +227,19 @@ if [ $REP_OCA_WEB != "False" ]; then
 fi
 
 if [ $REP_OCA_SERVER_TOOLS != "False" ]; then
-	sudo su root -c "echo -n ',$OE_HOME/OCA/server-tools/addons' >> /etc/${OE_CONFIG}.conf"
+	sudo su root -c "echo -n ',$OE_HOME/OCA/server-tools' >> /etc/${OE_CONFIG}.conf"
+fi
+
+if [ $REP_OCA_SERVER_UX != "False" ]; then
+	sudo su root -c "echo -n ',$OE_HOME/OCA/server-ux' >> /etc/${OE_CONFIG}.conf"
+fi
+
+if [ $REP_OCA_REPORT_ENGINE != "False" ]; then
+	sudo su root -c "echo -n ',$OE_HOME/OCA/report-engine' >> /etc/${OE_CONFIG}.conf"
+fi
+
+if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
+	sudo su root -c "echo -n ',$OE_HOME/OCA/account-financial-tools' >> /etc/${OE_CONFIG}.conf"
 fi
 
 sudo su root -c "echo ' ' >> /etc/${OE_CONFIG}.conf"
