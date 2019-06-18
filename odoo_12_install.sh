@@ -79,17 +79,20 @@ echo -e "\n---- Install tool packages ----"
 sudo apt-get install wget git python3-pip gdebi-core -y
 
 echo -e "\n---- Install python packages/librairies ----"
-sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen psycopg2 pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug XlsxWriter xlwt xlrd gdata
+sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug XlsxWriter xlwt xlrd gdata
 sudo pip3 install libsass==0.12.3
 echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
 sudo apt-get install node-less -y
-sudo apt-get install python-gevent -y
+sudo apt-get install python3-gevent -y
+sudo apt-get install python3-psycopg2 -y
 
 
 
 # after last update in Ubuntu 18.04 LTS
-sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil reportlab html2text docutils suds-jurko
+sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil html2text docutils suds-jurko
+sudo pip3 install matplotlib
+sudo apt-get install python3-reportlab
 sudo apt-get install python3-dateutil python3-psycopg2
 #####
 
