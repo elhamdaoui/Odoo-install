@@ -31,11 +31,11 @@ DB_PORT="5432"
 DB_PASSWORD="Mery"
 
 # OCA Modules
-REP_OCA_WEB = "https://github.com/OCA/web.git"
-REP_OCA_SERVER_TOOLS = "https://github.com/OCA/server-tools.git"
-REP_OCA_SERVER_UX = "https://github.com/OCA/server-ux.git"
-REP_OCA_REPORT_ENGINE = "https://github.com/OCA/reporting-engine.git"
-REP_OCA_ACC_FIN_TOOLS = "https://github.com/OCA/account-financial-tools.git"
+REP_OCA_WEB="https://github.com/OCA/web.git"
+REP_OCA_SERVER_TOOLS="https://github.com/OCA/server-tools.git"
+REP_OCA_SERVER_UX="https://github.com/OCA/server-ux.git"
+REP_OCA_REPORT_ENGINE="https://github.com/OCA/reporting-engine.git"
+REP_OCA_ACC_FIN_TOOLS="https://github.com/OCA/account-financial-tools.git"
 
 ##
 ###  WKHTMLTOPDF download links
