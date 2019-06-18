@@ -64,6 +64,7 @@ if [ $INSTALL_POSTGRESQL = "True" ]; then
 	sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
 else
 	sudo apt install postgresql-client-common
+	sudo apt-get install -y postgresql-client
 	echo -e "\n POSTGRESQL isn't installed due to the choice of the user! and no postgresql user have been created"
 fi
 #psql -U postgres -c "ALTER USER $OE_USER WITH PASSWORD '$DB_PASSWORD'"
