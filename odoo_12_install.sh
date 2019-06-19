@@ -243,7 +243,7 @@ else
 fi
 
 if [ $REP_OCA_WEB != "False" ]; then
-	sudo su root -c "echo -n ',$OE_HOME/OCA/web/addons' >> /etc/${OE_CONFIG}.conf"
+	sudo su root -c "echo -n ',$OE_HOME/OCA/web' >> /etc/${OE_CONFIG}.conf"
 fi
 
 if [ $REP_OCA_SERVER_TOOLS != "False" ]; then
