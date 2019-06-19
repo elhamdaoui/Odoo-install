@@ -37,6 +37,9 @@ REP_OCA_SERVER_UX="https://github.com/OCA/server-ux.git"
 REP_OCA_REPORT_ENGINE="https://github.com/OCA/reporting-engine.git"
 REP_OCA_ACC_FIN_TOOLS="https://github.com/OCA/account-financial-tools.git"
 REP_QUEUE="https://github.com/OCA/queue.git"
+REP_CUSTOM_1="False"
+REP_CUSTOM_1_NAME=""
+REP_CUSTOM_1_BRANCH=$OE_VERSION
 
 ##
 ###  WKHTMLTOPDF download links
@@ -199,11 +202,23 @@ if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/account-financial-tools"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_ACC_FIN_TOOLS $OE_HOME/OCA/account-financial-tools
 fi
+if [ $REP_CUSTOM_1 != "False" ]; then
+	echo -e "\n==== Download REP_CUSTOM_1 custom ===="
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/custom/$REP_CUSTOM_1_NAME"
+	sudo git clone --depth 1 --branch $REP_CUSTOM_1_BRANCH $REP_CUSTOM_1 $OE_HOME/custom/$REP_CUSTOM_1_NAME
+fi
+
 
 
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
+
+if [ $REP_CUSTOM_1 != "False" ]; then
+	echo -e "\n==== Download REP_CUSTOM_1 custom ===="
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/custom/$REP_CUSTOM_1_NAME"
+	sudo git clone --depth 1 --branch $REP_CUSTOM_1_BRANCH $REP_CUSTOM_1 $OE_HOME/custom/$REP_CUSTOM_1_NAME
+fi
 
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
@@ -247,6 +262,7 @@ fi
 if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
 	sudo su root -c "echo -n ',$OE_HOME/OCA/account-financial-tools' >> /etc/${OE_CONFIG}.conf"
 fi
+
 
 sudo su root -c "echo ' ' >> /etc/${OE_CONFIG}.conf"
 
