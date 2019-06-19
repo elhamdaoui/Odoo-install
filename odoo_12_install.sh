@@ -36,6 +36,7 @@ REP_OCA_SERVER_TOOLS="https://github.com/OCA/server-tools.git"
 REP_OCA_SERVER_UX="https://github.com/OCA/server-ux.git"
 REP_OCA_REPORT_ENGINE="https://github.com/OCA/reporting-engine.git"
 REP_OCA_ACC_FIN_TOOLS="https://github.com/OCA/account-financial-tools.git"
+REP_QUEUE="https://github.com/OCA/queue.git"
 
 ##
 ###  WKHTMLTOPDF download links
@@ -188,6 +189,9 @@ if [ $REP_OCA_REPORT_ENGINE != "False" ]; then
 	echo -e "\n==== Download OCA Report-engine ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/report-engine"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_REPORT_ENGINE $OE_HOME/OCA/report-engine
+	echo -e "\n==== Download OCA QUEUE ===="
+	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/queue"
+	sudo git clone --depth 1 --branch $OE_VERSION $REP_QUEUE $OE_HOME/OCA/queue
 fi
 
 if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
@@ -237,6 +241,7 @@ fi
 
 if [ $REP_OCA_REPORT_ENGINE != "False" ]; then
 	sudo su root -c "echo -n ',$OE_HOME/OCA/report-engine' >> /etc/${OE_CONFIG}.conf"
+	sudo su root -c "echo -n ',$OE_HOME/OCA/queue' >> /etc/${OE_CONFIG}.conf"
 fi
 
 if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
