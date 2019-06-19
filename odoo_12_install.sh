@@ -28,7 +28,9 @@ OE_CONFIG="${OE_USER}-server"
 #Set the database config
 DB_HOST="127.0.0.1"
 DB_PORT="5432"
+DB_USER=$OE_USER
 DB_PASSWORD="Mery"
+
 
 # OCA Modules
 REP_OCA_WEB="https://github.com/OCA/web.git"
@@ -233,7 +235,7 @@ echo -e "* Change server config file"
 sudo su root -c "echo 'admin_passwd = $OE_SUPERADMIN' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "echo 'db_host = $DB_HOST' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "echo 'db_port = $DB_PORT' >> /etc/${OE_CONFIG}.conf"
-sudo su root -c "echo 'db_user = $OE_USER' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "echo 'db_user = $DB_USER' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "echo 'db_password = $DB_PASSWORD' >> /etc/${OE_CONFIG}.conf"
 sudo su root -c "echo -n 'addons_path = ' >> /etc/${OE_CONFIG}.conf"
 if [  $IS_ENTERPRISE = "True" ]; then
