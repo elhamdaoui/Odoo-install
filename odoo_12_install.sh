@@ -187,7 +187,7 @@ fi
 if [ $REP_OCA_SERVER_UX != "False" ]; then
 	echo -e "\n==== Download OCA SERVER-UX ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/server-ux"
-	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_TOOLS $OE_HOME/OCA/server-ux
+	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_UX $OE_HOME/OCA/server-ux
 fi
 
 if [ $REP_OCA_REPORT_ENGINE != "False" ]; then
