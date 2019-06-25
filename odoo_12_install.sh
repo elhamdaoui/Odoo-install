@@ -204,13 +204,6 @@ if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/account-financial-tools"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_ACC_FIN_TOOLS $OE_HOME/OCA/account-financial-tools
 fi
-if [ $REP_CUSTOM_1 != "False" ]; then
-	echo -e "\n==== Download REP_CUSTOM_1 custom ===="
-	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/custom/$REP_CUSTOM_1_NAME"
-	sudo git clone --depth 1 --branch $REP_CUSTOM_1_BRANCH $REP_CUSTOM_1 $OE_HOME/custom/$REP_CUSTOM_1_NAME
-fi
-
-
 
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
@@ -218,7 +211,7 @@ sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
 
 if [ $REP_CUSTOM_1 != "False" ]; then
 	echo -e "\n==== Download REP_CUSTOM_1 custom ===="
-	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/custom/$REP_CUSTOM_1_NAME"
+	sudo su $OE_USER -c "mkdir $OE_HOME/custom/$REP_CUSTOM_1_NAME"
 	sudo git clone --depth 1 --branch $REP_CUSTOM_1_BRANCH $REP_CUSTOM_1 $OE_HOME/custom/$REP_CUSTOM_1_NAME
 fi
 
