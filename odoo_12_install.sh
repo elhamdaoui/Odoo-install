@@ -142,7 +142,7 @@ sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $
 
 # --- install requirements odoo 12
 sudo pip3 install wheel
-sudo pip3 intsall -r $OE_HOME_EXT/requirements.txt
+sudo pip3 install -r $OE_HOME_EXT/requirements.txt
 
 if [ $IS_ENTERPRISE = "True" ]; then
     # Odoo Enterprise install!
