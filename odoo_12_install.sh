@@ -99,8 +99,8 @@ sudo apt-get install python3-psycopg2 -y
 # after last update in Ubuntu 18.04 LTS
 sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil html2text docutils suds-jurko
 sudo pip3 install matplotlib
-sudo apt-get install python3-reportlab
-sudo apt-get install python3-dateutil python3-psycopg2
+sudo apt-get install python3-reportlab -y
+sudo apt-get install python3-dateutil python3-psycopg2 -y
 #####
 
 
