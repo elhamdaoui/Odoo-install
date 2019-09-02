@@ -20,6 +20,7 @@ SSL_PEM_KEY = "False"
 SSL_PRV_KEY = "False"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8012"
+SERVER_NAME = "localhost" # rosa.karizma.com || 189.17.16.15
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
 OE_VERSION="12.0"
@@ -360,15 +361,58 @@ echo -e "* Security Init File"
 sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
 sudo chmod 755 /etc/init.d/$OE_CONFIG
 sudo chown root: /etc/init.d/$OE_CONFIG
+CONTENT_NGINX = "upstream rosa {\n
+    server 127.0.0.1:8090;\n
+}\n
 
+server {\n
+    listen      80;\n
+    server_name $SERVER_NAME;\n
+    ssl on;
+    ssl_certificate /etc/nginx/ssl/certificate.admin-serv.net.crt;
+    ssl_certificate_key     /etc/nginx/ssl/admin-serv.net.deprotected.key;
+
+    access_log  /var/log/nginx/rosa.access.log;\n
+    error_log   /var/log/nginx/rosa.error.log;\n
+
+    proxy_buffers 16 64k;\n
+    proxy_buffer_size 128k;\n
+
+    location / {\n
+        proxy_pass http://localhost:$OE_PORT;\n
+        proxy_next_upstream error timeout invalid_header http_500 http_502 http_503 http_504;\n
+        proxy_redirect off;\n
+
+        proxy_set_header    Host            $host;\n
+        proxy_set_header    X-Real-IP       $remote_addr;\n
+        proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;\n
+        proxy_set_header    X-Forwarded-Proto https;\n
+    }\n
+
+    location ~* /web/static/ {\n
+        proxy_cache_valid 200 60m;\n
+        proxy_buffering on;\n
+        expires 864000;\n
+        proxy_pass http://localhost:$OE_PORT;\n
+    }\n
+
+    location /longpolling {\n
+        proxy_pass http://127.0.0.1:8072;\n
+    }\n
+}\n
+"
 if [ $INSTALL_NGINX = "True" ]; then
 	echo -e "* Install, config Nginx and SSL"
 	sudo apt install nginx
 	
 	if [ $ADD_SSL = "True" ] && [ $SSL_PEM_KEY != "False" ] && [ $SSL_PRV_KEY != "False" ]; then
-		sudo su root -c "echo '' > /etc/nginx/sites-available/$OE_USER"
-		sudo chown $OE_USER:$OE_USER /etc/nginx/sites-available/$OE_USER
-		sudo chmod 640 /etc/nginx/sites-available/$OE_USER
+		sudo su root -c "echo '$CONTENT_NGINX' > /etc/nginx/sites-available/$OE_USER"
+		sudo ln -s /etc/nginx/sites-available/$OE_USER /etc/nginx/sites-enabled/$OE_USER 
+		sudo chown root:root /etc/nginx/sites-available/$OE_USER
+		sudo chmod 775 /etc/nginx/sites-available/$OE_USER
+		
+		sudo chown root:root /etc/nginx/sites-enabled/$OE_USER
+		sudo chmod 775 /etc/nginx/sites-enabled/$OE_USER
 	fi
 	
 fi
