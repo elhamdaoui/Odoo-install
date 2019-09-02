@@ -14,6 +14,10 @@ INSTALL_WKHTMLTOPDF="True"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_POSTGRESQL="False"
 CREATE_USER_POSTGRESQL="True"
+INSALL_NGINX = "False"
+ADD_SSL = "False"
+SSL_PEM_KEY = "False"
+SSL_PRV_KEY = "False"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8012"
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
@@ -357,10 +361,17 @@ sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
 sudo chmod 755 /etc/init.d/$OE_CONFIG
 sudo chown root: /etc/init.d/$OE_CONFIG
 
-
-echo -e "* Install, config Nginx and SSL"
-sudo apt install nginx
-
+if [ $INSTALL_NGINX = "True" ]; then
+	echo -e "* Install, config Nginx and SSL"
+	sudo apt install nginx
+	
+	if [ $ADD_SSL = "True" ] && [ $SSL_PEM_KEY != "False" ] && [ $SSL_PRV_KEY != "False" ]; then
+		sudo su root -c "echo '' > /etc/nginx/sites-available/$OE_USER"
+		sudo chown $OE_USER:$OE_USER /etc/nginx/sites-available/$OE_USER
+		sudo chmod 640 /etc/nginx/sites-available/$OE_USER
+	fi
+	
+fi
 
 echo -e "* Start ODOO on Startup"
 sudo update-rc.d $OE_CONFIG defaults
