@@ -15,16 +15,13 @@ INSTALL_WKHTMLTOPDF="True"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_POSTGRESQL="True"
 CREATE_USER_POSTGRESQL="True"
-INSALL_NGINX = "False"
-ADD_SSL = "False"
-SSL_PEM_KEY = "False"
-SSL_PRV_KEY = "False"
+
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8013"
 SERVER_NAME = "localhost" # rosa.karizma.com || 189.17.16.15
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
-OE_VERSION="12.0"
+OE_VERSION="13.0"
 # Set this to True if you want to install Odoo 10 Enterprise!
 IS_ENTERPRISE="True"
 #set the superadmin password
@@ -37,23 +34,12 @@ DB_PORT="5432"
 DB_USER=$OE_USER
 DB_PASSWORD="MAJID"
 
+####################################### ALL THESE LINES BELOW MUST BE DOCUMENTED #############################
 
-# OCA Modules
-#REP_OCA_WEB="https://github.com/OCA/web.git"
-#REP_OCA_SERVER_TOOLS="https://github.com/OCA/server-tools.git"
-#REP_OCA_SERVER_UX="https://github.com/OCA/server-ux.git"
-#REP_OCA_REPORT_ENGINE="https://github.com/OCA/reporting-engine.git"
-#REP_OCA_ACC_FIN_TOOLS="https://github.com/OCA/account-financial-tools.git"
-#REP_QUEUE="https://github.com/OCA/queue.git"
-#REP_CUSTOM_1="False"
-#REP_CUSTOM_1_NAME=""
-#REP_CUSTOM_1_BRANCH=$OE_VERSION
 
-##
+
 ###  WKHTMLTOPDF download links
-## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
-## in order to have correct version of wkhtmltox installed, for a danger note refer to 
-## https://www.odoo.com/documentation/8.0/setup/install.html#deb ):
+
 WKHTMLTOX_X64=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
 WKHTMLTOX_X32=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_i386.deb
 
@@ -77,7 +63,7 @@ if [ $INSTALL_POSTGRESQL = "True" ]; then
 else
 	sudo apt install postgresql-client-common
 	sudo apt-get install -y postgresql-client
-	echo -e "\n POSTGRESQL isn't installed due to the choice of the user! and no postgresql user have been created"
+	echo -e "\n POSTGRESQL isn't installed due to the choice of the user! and no postgresql user has been created"
 fi
 #psql -U postgres -c "ALTER USER $OE_USER WITH PASSWORD '$DB_PASSWORD'"
 #--------------------------------------------------
