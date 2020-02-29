@@ -12,7 +12,7 @@ OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_WKHTMLTOPDF="True"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
-INSTALL_POSTGRESQL="False"
+INSTALL_POSTGRESQL="True"
 CREATE_USER_POSTGRESQL="True"
 INSALL_NGINX = "False"
 ADD_SSL = "False"
@@ -34,7 +34,7 @@ OE_CONFIG="${OE_USER}-server"
 DB_HOST="127.0.0.1"
 DB_PORT="5432"
 DB_USER=$OE_USER
-DB_PASSWORD="Mery"
+DB_PASSWORD="odoo12"
 
 
 # OCA Modules
@@ -84,15 +84,15 @@ fi
 #--------------------------------------------------
 echo -e "\n---- Install/upgrade Python 3 Pip and other depends"
 sudo apt install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less -y
-sudo pip3 install --upgrade pip
+sudo python3 -m pip install --upgrade pip
 echo -e "\n---- Pip current version ---" && pip3 --version
 
 echo -e "\n---- Install tool packages ----"
 sudo apt-get install wget git python3-pip gdebi-core -y
 
 echo -e "\n---- Install python packages/librairies ----"
-sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug XlsxWriter xlwt xlrd gdata
-sudo pip3 install libsass==0.12.3
+sudo python3 -m pip install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug XlsxWriter xlwt xlrd gdata
+sudo python3 -m pip install libsass==0.12.3
 echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
 sudo apt-get install node-less -y
@@ -102,8 +102,8 @@ sudo apt-get install python3-psycopg2 -y
 
 
 # after last update in Ubuntu 18.04 LTS
-sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil html2text docutils suds-jurko
-sudo pip3 install matplotlib
+sudo python3 -m pip install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil html2text docutils suds-jurko
+sudo python3 -m pip install matplotlib
 sudo apt-get install python3-reportlab
 sudo apt-get install python3-dateutil python3-psycopg2
 #####
@@ -147,7 +147,7 @@ sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $
 
 # --- install requirements odoo 12
 sudo pip3 install wheel
-sudo pip3 intsall -r $OE_HOME_EXT/requirements.txt
+sudo pip3 install -r $OE_HOME_EXT/requirements.txt
 
 if [ $IS_ENTERPRISE = "True" ]; then
     # Odoo Enterprise install!
