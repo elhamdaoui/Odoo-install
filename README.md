@@ -1,4 +1,4 @@
-# Odoo-install
+# Odoo-install (https://travis-ci.org/elhamdaoui/odoo.svg?branch=10.0)
 My bash script to install odoo 8.0, 10.0, 11.0, 12.0  and 13.0 automatically.
 
 - After executing this script, Try to use Terminal and:
