@@ -91,7 +91,7 @@ echo -e "\n---- Install tool packages ----"
 sudo apt-get install wget git python3-pip gdebi-core -y
 
 echo -e "\n---- Install python packages/librairies ----"
-sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject Werkzeug XlsxWriter xlwt xlrd gdata
+sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject XlsxWriter xlwt xlrd gdata
 sudo pip3 install libsass==0.12.3
 echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
