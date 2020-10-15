@@ -19,7 +19,7 @@ ADD_SSL = "False"
 SSL_PEM_KEY = "False"
 SSL_PRV_KEY = "False"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
-OE_PORT="8012"
+OE_PORT="8013"
 SERVER_NAME = "localhost" # rosa.karizma.com || 189.17.16.15
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
@@ -93,6 +93,7 @@ sudo apt-get install wget git python3-pip gdebi-core -y
 echo -e "\n---- Install python packages/librairies ----"
 sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent greenlet html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject XlsxWriter xlwt xlrd gdata
 sudo pip3 install libsass==0.12.3
+sudo pip3 install Werkzeug==0.14.1
 echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
 sudo apt-get install node-less -y
