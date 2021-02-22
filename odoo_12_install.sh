@@ -74,8 +74,8 @@ if [ $INSTALL_POSTGRESQL = "True" ]; then
 	echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
 	sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
 else
-	sudo apt install postgresql-client-common
-	sudo apt-get install -y postgresql-client
+	sudo apt install postgresql-client-common -y
+	sudo apt-get install postgresql-client -y
 	echo -e "\n POSTGRESQL isn't installed due to the choice of the user! and no postgresql user have been created"
 fi
 #psql -U postgres -c "ALTER USER $OE_USER WITH PASSWORD '$DB_PASSWORD'"
@@ -102,10 +102,10 @@ sudo apt-get install python3-psycopg2 -y
 
 
 # after last update in Ubuntu 18.04 LTS
-sudo python3 -m pip install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil html2text docutils suds-jurko
-sudo python3 -m pip install matplotlib
-sudo apt-get install python3-reportlab
-sudo apt-get install python3-dateutil python3-psycopg2
+sudo python3 -m pip install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil html2text docutils suds-jurko -y
+sudo python3 -m pip install matplotlib -y
+sudo apt-get install python3-reportlab -y
+sudo apt-get install python3-dateutil python3-psycopg2 -y
 #####
 
 
@@ -146,7 +146,7 @@ echo -e "\n==== Installing ODOO Server ===="
 sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $OE_HOME_EXT/
 
 # --- install requirements odoo 12
-sudo pip3 install wheel
+sudo pip3 install wheel 
 sudo pip3 install -r $OE_HOME_EXT/requirements.txt
 
 if [ $IS_ENTERPRISE = "True" ]; then
@@ -169,7 +169,7 @@ if [ $IS_ENTERPRISE = "True" ]; then
 
     echo -e "\n---- Added Enterprise code under $OE_HOME/enterprise/addons ----"
     echo -e "\n---- Installing Enterprise specific libraries ----"
-    sudo apt-get install nodejs npm
+    sudo apt-get install nodejs npm -y
     sudo npm install -g less
     sudo npm install -g less-plugin-clean-css
 fi
