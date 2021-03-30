@@ -14,7 +14,7 @@ INSTALL_WKHTMLTOPDF="True"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_POSTGRESQL="False"
 CREATE_USER_POSTGRESQL="True"
-INSALL_NGINX = "False"
+INSTALL_NGINX = "True"
 ADD_SSL = "False"
 SSL_PEM_KEY = "False"
 SSL_PRV_KEY = "False"
@@ -85,6 +85,7 @@ fi
 echo -e "\n---- Install/upgrade Python 3 Pip and other depends"
 sudo apt install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less -y
 sudo pip3 install --upgrade pip
+sudo pip3 install Werkzeug==0.11.15
 echo -e "\n---- Pip current version ---" && pip3 --version
 
 echo -e "\n---- Install tool packages ----"
