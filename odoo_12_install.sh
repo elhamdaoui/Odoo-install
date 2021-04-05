@@ -146,7 +146,8 @@ echo -e "\n==== Installing ODOO Server ===="
 sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $OE_HOME_EXT/
 
 # --- install requirements odoo 12
-sudo pip3 install wheel 
+
+sudo pip3 install wheel
 sudo pip3 install -r $OE_HOME_EXT/requirements.txt
 
 if [ $IS_ENTERPRISE = "True" ]; then
