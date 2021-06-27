@@ -9,6 +9,7 @@ Bash script to install odoo 8.0, 10.0, 11.0, 12.0, 13.0 and 14.0 .
   
   - Listing the psq roles: $ \du
   
-  - Update Password for odoo13 role: $ alter role odoo13 with password 'odoo13'
+  - Update Password for OE_USER (ex: "odoo13") role: $ alter role odoo13 with password 'odoo13'
   
   - exit postgres: $ \q
+  - The new password must be copied on 'db_password=' from 'odoo.conf' 
