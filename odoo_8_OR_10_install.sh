@@ -48,6 +48,14 @@ sudo apt-get update
 sudo apt-get upgrade -y
 
 #--------------------------------------------------
+# Install Python2 (added for ubuntu 20.04)
+#--------------------------------------------------
+
+sudo apt install python-dev
+sudo apt install libldap2-dev
+sudo apt install libsasl2-dev gcc
+
+#--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
