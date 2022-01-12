@@ -14,7 +14,7 @@ INSTALL_WKHTMLTOPDF="True"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_POSTGRESQL="False"
 CREATE_USER_POSTGRESQL="True"
-INSTALL_NGINX = "True"
+INSTALL_NGINX = "False"
 ADD_SSL = "False"
 SSL_PEM_KEY = "False"
 SSL_PRV_KEY = "False"
