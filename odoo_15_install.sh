@@ -20,7 +20,7 @@ SSL_PEM_KEY = "False"
 SSL_PRV_KEY = "False"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8014"
-SERVER_NAME = "localhost" # rosa.karizma.com || 189.17.16.15
+SERVER_NAME = "localhost" # test.odoo.com || 13.17.16.15
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
 OE_VERSION="15.0"
@@ -357,7 +357,8 @@ echo -e "* Security Init File"
 sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
 sudo chmod 755 /etc/init.d/$OE_CONFIG
 sudo chown root: /etc/init.d/$OE_CONFIG
-CONTENT_NGINX = "upstream rosa {\n
+
+= "upstream odoo {\n
     server 127.0.0.1:8090;\n
 }\n
 server {\n
@@ -366,8 +367,8 @@ server {\n
     ssl on;
     ssl_certificate /etc/nginx/ssl/certificate.admin-serv.net.crt;
     ssl_certificate_key     /etc/nginx/ssl/admin-serv.net.deprotected.key;
-    access_log  /var/log/nginx/rosa.access.log;\n
-    error_log   /var/log/nginx/rosa.error.log;\n
+    access_log  /var/log/nginx/odoo.access.log;\n
+    error_log   /var/log/nginx/odoo.error.log;\n
     proxy_buffers 16 64k;\n
     proxy_buffer_size 128k;\n
     location / {\n
