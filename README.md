@@ -13,3 +13,8 @@ Bash script to install odoo 8.0, 10.0, 11.0, 12.0, 13.0, 14.0 and 15.0 .
   
   - exit postgres: $ \q
   - The new password must be copied on 'db_password=' in 'odooXX-server.conf' (XX in 8,10,11,12,13,14...)
+
+
+
+For Centos/Redhat, see the link below (odoo 13)
+https://www.tecmint.com/install-odoo-in-centos-8/
