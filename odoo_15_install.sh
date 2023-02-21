@@ -358,7 +358,7 @@ sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
 sudo chmod 755 /etc/init.d/$OE_CONFIG
 sudo chown root: /etc/init.d/$OE_CONFIG
 
-= "upstream odoo {\n
+CONTENT_NGINX="upstream odoo {\n
     server 127.0.0.1:8090;\n
 }\n
 server {\n
