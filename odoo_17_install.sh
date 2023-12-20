@@ -5,7 +5,7 @@
  
 ##fixed parameters
 #odoo
-OE_USER="odoo14"
+OE_USER="odoo17"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
@@ -19,13 +19,13 @@ ADD_SSL = "False"
 SSL_PEM_KEY = "False"
 SSL_PRV_KEY = "False"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
-OE_PORT="8014"
+OE_PORT="8017"
 SERVER_NAME = "localhost" # test.odoo.com || 50.17.16.15
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
-OE_VERSION="14.0"
+OE_VERSION="17.0"
 # Set this to True if you want to install Odoo 10 Enterprise!
-IS_ENTERPRISE="True"
+IS_ENTERPRISE="False"
 #set the superadmin password
 OE_SUPERADMIN="ODOO@ADMIN"
 OE_CONFIG="${OE_USER}-server"
@@ -34,7 +34,7 @@ OE_CONFIG="${OE_USER}-server"
 DB_HOST="127.0.0.1"
 DB_PORT="5432"
 DB_USER=$OE_USER
-DB_PASSWORD="LEGEND"
+DB_PASSWORD="Odoo17@Legend/mjid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"
 
 
 # OCA Modules
@@ -62,9 +62,6 @@ WKHTMLTOX_X32=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 echo -e "\n---- Update Server ----"
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install python3-pip libpq-dev libldap2-dev libsasl2-dev libssl-dev libffi-dev build-essential
-sudo apt-get install python3.10-dev
-#sudo apt-get install python-dev # if version is less than 10
 
 #--------------------------------------------------
 # Install PostgreSQL Server
@@ -81,37 +78,42 @@ else
 	sudo apt-get install -y postgresql-client
 	echo -e "\n POSTGRESQL isn't installed due to the choice of the user! and no postgresql user have been created"
 fi
+
+sudo apt install postgresql-client
 #psql -U postgres -c "ALTER USER $OE_USER WITH PASSWORD '$DB_PASSWORD'"
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
+sudo apt-get install python3-pip libpq-dev libldap2-dev libsasl2-dev libssl-dev libffi-dev build-essential
+sudo apt-get install python3.10-dev
+
 echo -e "\n---- Install/upgrade Python 3 Pip and other depends"
-sudo apt install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less -y
+#sudo apt install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less -y
 sudo pip3 install --upgrade pip
-sudo pip3 install Werkzeug==0.11.15
-echo -e "\n---- Pip current version ---" && pip3 --version
+#sudo pip3 install Werkzeug==0.11.15
+#echo -e "\n---- Pip current version ---" && pip3 --version
 
 echo -e "\n---- Install tool packages ----"
-sudo apt-get install wget git python3-pip gdebi-core -y
+#sudo apt-get install wget git python3-pip gdebi-core -y
 
 echo -e "\n---- Install python packages/librairies ----"
-sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject XlsxWriter xlwt xlrd gdata
-sudo pip3 install greenlet==1.1.0
-sudo pip3 install libsass==0.12.3
-sudo pip3 install Werkzeug==0.14.1
+#sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject XlsxWriter xlwt xlrd gdata
+#sudo pip3 install greenlet==1.1.0
+#sudo pip3 install libsass==0.12.3
+#sudo pip3 install Werkzeug==0.14.1
 echo -e "\n--- Install other required packages"
-sudo apt-get install node-clean-css -y
-sudo apt-get install node-less -y
-sudo apt-get install python3-gevent -y
-sudo apt-get install python3-psycopg2 -y
+#sudo apt-get install node-clean-css -y
+#sudo apt-get install node-less -y
+#sudo apt-get install python3-gevent -y
+#sudo apt-get install python3-psycopg2 -y
 
 
 
 # after last update in Ubuntu 18.04 LTS
-sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil html2text docutils suds-jurko
-sudo pip3 install matplotlib
-sudo apt-get install python3-reportlab
-sudo apt-get install python3-dateutil python3-psycopg2
+#sudo pip3 install babel PyPDF2 passlib werkzeug lxml decorator Pillow psutil html2text docutils suds-jurko
+#sudo pip3 install matplotlib
+#sudo apt-get install python3-reportlab
+#sudo apt-get install python3-dateutil python3-psycopg2
 #####
 
 
@@ -149,6 +151,7 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 # Install ODOO
 #--------------------------------------------------
 echo -e "\n==== Installing ODOO Server ===="
+sudo apt install git -y
 sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $OE_HOME_EXT/
 
 # --- install requirements odoo 12
@@ -183,25 +186,25 @@ fi
 echo -e "\n---------------------------OCA----------------------------"
 sudo su $OE_USER -c "mkdir $OE_HOME/OCA"
 
-if [ $REP_OCA_WEB != "False" ]; then
+if [ "$REP_OCA_WEB" != "False" ]; then
 	echo -e "\n==== Download OCA WEB ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/web"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_WEB $OE_HOME/OCA/web
 fi
 
-if [ $REP_OCA_SERVER_TOOLS != "False" ]; then
+if [ "$REP_OCA_SERVER_TOOLS" != "False" ]; then
 	echo -e "\n==== Download OCA Server-tools ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/server-tools"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_TOOLS $OE_HOME/OCA/server-tools
 fi
 
-if [ $REP_OCA_SERVER_UX != "False" ]; then
+if [ "$REP_OCA_SERVER_UX" != "False" ]; then
 	echo -e "\n==== Download OCA SERVER-UX ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/server-ux"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_SERVER_UX $OE_HOME/OCA/server-ux
 fi
 
-if [ $REP_OCA_REPORT_ENGINE != "False" ]; then
+if [ "$REP_OCA_REPORT_ENGINE" != "False" ]; then
 	echo -e "\n==== Download OCA Report-engine ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/report-engine"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_REPORT_ENGINE $OE_HOME/OCA/report-engine
@@ -210,7 +213,7 @@ if [ $REP_OCA_REPORT_ENGINE != "False" ]; then
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_QUEUE $OE_HOME/OCA/queue
 fi
 
-if [ $REP_OCA_ACC_FIN_TOOLS != "False" ]; then
+if [ "$REP_OCA_ACC_FIN_TOOLS" != "False" ]; then
 	echo -e "\n==== Download OCA Report-engine ===="
 	sudo su $OE_USER -c "mkdir $OE_HOME/OCA/account-financial-tools"
 	sudo git clone --depth 1 --branch $OE_VERSION $REP_OCA_ACC_FIN_TOOLS $OE_HOME/OCA/account-financial-tools

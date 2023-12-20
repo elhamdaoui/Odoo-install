@@ -62,6 +62,9 @@ WKHTMLTOX_X32=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.
 echo -e "\n---- Update Server ----"
 sudo apt-get update
 sudo apt-get upgrade -y
+sudo apt-get install python3-pip libpq-dev libldap2-dev libsasl2-dev libssl-dev libffi-dev build-essential
+sudo apt-get install python3.10-dev
+#sudo apt-get install python-dev # if version is less than 10
 
 #--------------------------------------------------
 # Install PostgreSQL Server
