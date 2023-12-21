@@ -53,7 +53,8 @@ REP_CUSTOM_1_BRANCH=$OE_VERSION
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
 ## in order to have correct version of wkhtmltox installed, for a danger note refer to 
 ## https://www.odoo.com/documentation/8.0/setup/install.html#deb ):
-WKHTMLTOX_X64=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+# FOR UBUNTU Jammy (22.04), you can change the link (take a look at : https://github.com/wkhtmltopdf/packaging/releases/tag/0.12.6.1-3)
+WKHTMLTOX_X64=https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_amd64.deb
 WKHTMLTOX_X32=https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_i386.deb
 
 #--------------------------------------------------
@@ -84,12 +85,16 @@ sudo apt install postgresql-client
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
+sudo pip3 install --upgrade pip
+sudo apt install npm
+sudo npm install -g rtlcss
 sudo apt-get install python3-pip libpq-dev libldap2-dev libsasl2-dev libssl-dev libffi-dev build-essential
 sudo apt-get install python3.10-dev
 
 echo -e "\n---- Install/upgrade Python 3 Pip and other depends"
 #sudo apt install git python3-pip build-essential wget python3-dev python3-venv python3-wheel libxslt-dev libzip-dev libldap2-dev libsasl2-dev python3-setuptools node-less -y
-sudo pip3 install --upgrade pip
+
+
 #sudo pip3 install Werkzeug==0.11.15
 #echo -e "\n---- Pip current version ---" && pip3 --version
 
@@ -121,7 +126,7 @@ echo -e "\n--- Install other required packages"
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
 #--------------------------------------------------
-if [ $INSTALL_WKHTMLTOPDF = "True" ]; then
+if [ "$INSTALL_WKHTMLTOPDF" = "True" ]; then
   echo -e "\n---- Install wkhtml and place shortcuts on correct place for ODOO 10 ----"
   #pick up correct one from x64 & x32 versions:
   if [ "`getconf LONG_BIT`" == "64" ]; then
