@@ -1,8 +1,8 @@
-# Odoo-install From version 8.0 to 15.0
+# Odoo-install From version 8.0 to 17.0
 
 ## For Dockers : take a look at [Odoo dockers based on git repositories](https://github.com/elhamdaoui/odoo_docker/tree/arm64_v8)
 
-Bash script to install odoo 8.0, 10.0, 11.0, 12.0, 13.0, 14.0 and 15.0 .
+Bash script to install odoo 8.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0 and 17.0
 
 - After executing this script, Try to use Terminal and:
 - sudo su - postgres -c "createuser -s odoo" 2> /dev/null || true
