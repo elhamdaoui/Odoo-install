@@ -5,6 +5,7 @@
  
 ##fixed parameters
 #odoo
+PY_VERSION="3.10"
 OE_USER="odoo14"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/odoo-server"
@@ -14,10 +15,10 @@ INSTALL_WKHTMLTOPDF="True"
 #Set to true if you want to install it, false if you don't need it or have it already installed.
 INSTALL_POSTGRESQL="False"
 CREATE_USER_POSTGRESQL="True"
-INSTALL_NGINX = "False"
-ADD_SSL = "False"
-SSL_PEM_KEY = "False"
-SSL_PRV_KEY = "False"
+INSTALL_NGINX="False"
+ADD_SSL="False"
+SSL_PEM_KEY="False"
+SSL_PRV_KEY="False"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8014"
 SERVER_NAME = "localhost" # test.odoo.com || 50.17.16.15
@@ -97,7 +98,10 @@ sudo apt-get install wget git python3-pip gdebi-core -y
 echo -e "\n---- Install python packages/librairies ----"
 sudo pip3 install Babel decorator docutils ebaysdk feedparser gevent html2text Jinja2 lxml Mako MarkupSafe mock num2words ofxparse passlib Pillow psutil psycogreen pydot pyparsing PyPDF2 pyserial python-dateutil python-openid pytz pyusb PyYAML qrcode reportlab requests six suds-jurko vatnumber vobject XlsxWriter xlwt xlrd gdata
 sudo pip3 install greenlet==1.1.0
-sudo pip3 install libsass==0.12.3
+
+#0.12.3 for Python 3.8
+sudo pip3 install libsass==0.17.0
+
 sudo pip3 install Werkzeug==0.14.1
 echo -e "\n--- Install other required packages"
 sudo apt-get install node-clean-css -y
