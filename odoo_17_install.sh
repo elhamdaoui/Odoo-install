@@ -287,6 +287,8 @@ sudo su root -c "echo 'logrotate = True' >> /etc/${OE_CONFIG}.conf"
 
 echo -e "* Change default xmlrpc port"
 sudo su root -c "echo 'xmlrpc_port = $OE_PORT' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "echo 'gevent_port = 8072' >> /etc/${OE_CONFIG}.conf"
+sudo su root -c "echo 'proxy_mode = True' >> /etc/${OE_CONFIG}.conf"
 
 echo -e "* Create startup file"
 sudo su root -c "echo '#!/bin/sh' > $OE_HOME_EXT/start.sh"
