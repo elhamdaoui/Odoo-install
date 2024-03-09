@@ -237,6 +237,13 @@ fi
 echo -e "\n---- Setting permissions on home folder ----"
 sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
 
+# ---- INSTALL GEOIP database ---
+sudo apt-get install geoip-database -y
+# download mnaually the files GeoLite2-City.mmdb and GeoLite2-Country.mmdb from https://dev.maxmind.com/geoip/geolite2-free-geolocation-data
+# mv ~/Downloads/GeoLite2-City.mmdb /usr/share/GeoIP/
+# mv ~/Downloads/GeoLite2-Country.mmdb /usr/share/GeoIP/
+# Test it in your odoo website : <h1 class="text-center" t-esc="request.geoip.country.name or 'geoip failure'"/>
+
 
 echo -e "* Create server config file"
 sudo su root -c "echo '[options]' > /etc/${OE_CONFIG}.conf"
