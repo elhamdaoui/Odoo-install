@@ -5,6 +5,12 @@ upstream odoo {
 upstream odoochat {
   server 127.0.0.1:8072;
 }
+#---- ADD this block in nginx.conf
+map $http_upgrade $connection_upgrade {
+default upgrade;
+'' close;
+}
+#-----
 
 server {
     listen      80;
