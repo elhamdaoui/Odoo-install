@@ -5,7 +5,7 @@
  
 ##fixed parameters
 #odoo
-OE_USER="odoo17"
+OE_USER="odoo"
 OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/odoo-server"
 #The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
@@ -23,7 +23,7 @@ OE_PORT="8017"
 SERVER_NAME = "localhost" # test.odoo.com || 50.17.16.15
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
-OE_VERSION="17.0"
+OE_VERSION="17.0"#OR 16.0
 # Set this to True if you want to install Odoo 10 Enterprise!
 IS_ENTERPRISE="False"
 #set the superadmin password
