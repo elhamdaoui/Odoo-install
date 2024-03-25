@@ -303,6 +303,9 @@ sudo su root -c "echo '#!/bin/sh' > $OE_HOME_EXT/start.sh"
 sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/odoo-bin --config=/etc/${OE_CONFIG}.conf' >> $OE_HOME_EXT/start.sh"
 sudo chmod 755 $OE_HOME_EXT/start.sh
 
+sudo apt install nginx
+sudo apt install certbot python3-certbot-nginx
+
 #--------------------------------------------------
 # Adding ODOO as a deamon (initscript)
 #--------------------------------------------------
