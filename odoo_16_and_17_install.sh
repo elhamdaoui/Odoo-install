@@ -20,6 +20,7 @@ SSL_PEM_KEY = "False"
 SSL_PRV_KEY = "False"
 #Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
 OE_PORT="8017"
+WEBSOCKET_PORT="8072"
 SERVER_NAME = "localhost" # test.odoo.com || 50.17.16.15
 #Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
@@ -384,6 +385,9 @@ sudo chown root: /etc/init.d/$OE_CONFIG
 CONTENT_NGINX="upstream odoo {\n
     server 127.0.0.1:$OE_PORT;\n
 }\n
+upstream odoochat {\n
+    server 127.0.0.1:$WEBSOCKET_PORT;\n
+}\n
 server {\n
     listen      80;\n
     server_name $SERVER_NAME;\n
@@ -409,9 +413,15 @@ server {\n
         expires 864000;\n
         proxy_pass http://localhost:$OE_PORT;\n
     }\n
-    location /longpolling {\n
-        proxy_pass http://127.0.0.1:8072;\n
-    }\n
+    location /websocket {
+	proxy_pass http://odoochat;
+	proxy_set_header X-Real-IP $remote_addr;
+	proxy_set_header Upgrade $http_upgrade;
+	proxy_set_header Connection $connection_upgrade;
+	proxy_set_header X-Forwarded-Host $host;
+	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	proxy_set_header X-Forwarded-Proto $scheme;
+    }
 }\n
 "
 if [ $INSTALL_NGINX = "True" ]; then
